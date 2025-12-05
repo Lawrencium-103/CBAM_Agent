@@ -7,7 +7,18 @@ from langchain_core.messages import HumanMessage, SystemMessage
 
 from agent import agent_app, SYSTEM_PROMPT
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI(title="CBAM Agent Webhook")
+
+# Add CORS Middleware to allow requests from any origin (including local files)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
 
 class WebhookInput(BaseModel):
     input: str
