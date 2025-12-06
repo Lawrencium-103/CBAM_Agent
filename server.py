@@ -24,6 +24,10 @@ class WebhookInput(BaseModel):
     input: str
     sessionId: Optional[str] = "default"
 
+@app.options("/webhook")
+async def options_webhook():
+    return {}
+
 @app.post("/webhook")
 async def webhook(payload: WebhookInput):
     """
