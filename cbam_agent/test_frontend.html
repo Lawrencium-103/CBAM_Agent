@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBAM Agent Chat</title>
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: 2rem auto; padding: 0 1rem; }
+        #chat-box { border: 1px solid #ccc; height: 400px; overflow-y: scroll; padding: 1rem; margin-bottom: 1rem; border-radius: 8px; }
+        .message { margin-bottom: 0.5rem; padding: 0.5rem; border-radius: 4px; }
+        .user { background-color: #e3f2fd; text-align: right; margin-left: 20%; }
+        .agent { background-color: #f5f5f5; margin-right: 20%; }
+        .input-area { display: flex; gap: 0.5rem; }
+        input { flex-grow: 1; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; }
+        button { padding: 0.5rem 1rem; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:disabled { background-color: #ccc; }
+    </style>
+</head>
+<body>
+    <h1>CBAM Assistant</h1>
+    <div id="chat-box"></div>
+    <div class="input-area">
+        <input type="text" id="user-input" placeholder="Ask about CBAM..." onkeypress="if(event.key==='Enter') sendMessage()">
+        <button onclick="sendMessage()" id="send-btn">Send</button>
+    </div>
+
+    <script>
+        // YOUR RENDER URL
+        const WEBHOOK_URL = "https://cbam-agent.onrender.com/webhook";
+
+        async function sendMessage() {
+            const inputField = document.getElementById('user-input');
+            const sendBtn = document.getElementById('send-btn');
+            const chatBox = document.getElementById('chat-box');
+            const text = inputField.value.trim();
+
+            if (!text) return;
+
+            // Add User Message
+            appendMessage(text, 'user');
+            inputField.value = '';
+            inputField.disabled = true;
+            sendBtn.disabled = true;
+
+            try {
+                const response = await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        input: text,
+                        sessionId: "web-session-" + Date.now() // Unique session ID
+                    })
+                });
+
+                if (!response.ok) throw new Error('Network response was not ok');
+
+                const data = await response.json();
+                appendMessage(data.output, 'agent');
+
+            } catch (error) {
+                console.error('Error:', error);
+                appendMessage("Error: Could not connect to agent.", 'agent');
+            } finally {
+                inputField.disabled = false;
+                sendBtn.disabled = false;
+                inputField.focus();
+            }
+        }
+
+        function appendMessage(text, sender) {
+            const chatBox = document.getElementById('chat-box');
+            const div = document.createElement('div');
+            div.classList.add('message', sender);
+            div.innerText = text;
+            chatBox.appendChild(div);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBAg | AI Sustainability Compliance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="font-inter antialiased selection:bg-cyan-500 selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-2">
+                    <div class="bg-gradient-to-br from-emerald-600 to-cyan-600 p-1.5 rounded-lg">
+                        <i data-lucide="leaf" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <span class="font-bold text-xl tracking-tight text-white">CBAg</span>
+                </div>
+                <div class="hidden md:flex items-center gap-6">
+                    <a href="about.html"
+                        class="text-slate-300 hover:text-white transition-colors text-sm font-medium">About Us</a>
+                    <div
+                        class="flex items-center gap-2 px-3 py-1 bg-emerald-900/20 border border-emerald-800/50 rounded-full">
+                        <span class="relative flex h-2 w-2">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                        </span>
+                        <span class="text-xs text-emerald-400 font-mono uppercase">CBAM Info Updated</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <main class="pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center max-w-4xl mx-auto mb-12">
+            <div
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-900/10 border border-cyan-800/30 mb-6">
+                <i data-lucide="cpu" class="w-4 h-4 text-cyan-400"></i>
+                <span class="text-sm text-cyan-400 font-semibold uppercase tracking-wider">AI-Powered Compliance</span>
+            </div>
+
+            <h1 class="text-5xl md:text-7xl font-black tracking-tight mb-6 leading-tight text-white">
+                Sustainability Meets <br>
+                <span class="text-gradient">Intelligent Automation</span>
+            </h1>
+
+            <p class="text-xl md:text-2xl text-slate-400 mb-8 max-w-2xl mx-auto leading-relaxed">
+                The definitive tool for <span class="text-white font-semibold">Customs Brokers</span> and <span
+                    class="text-white font-semibold">Freight Forwarders</span>. Instant, cited answers from the latest
+                EU regulations.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+                <button onclick="document.getElementById('chat-interface').scrollIntoView({behavior: 'smooth'})"
+                    class="group relative px-8 py-4 bg-gradient-to-r from-emerald-600 to-cyan-600 rounded-xl font-bold text-white shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 transition-all hover:-translate-y-1">
+                    <span class="flex items-center gap-2">
+                        Try CBAg Now
+                        <i data-lucide="arrow-down" class="w-5 h-5 group-hover:translate-y-1 transition-transform"></i>
+                    </span>
+                </button>
+            </div>
+
+            <div id="location-banner"
+                class="hidden animate-fade-in mb-8 p-4 bg-slate-800/50 rounded-xl border border-slate-700 inline-block">
+                <p class="text-slate-300 flex items-center gap-2 justify-center">
+                    <i data-lucide="globe" class="w-5 h-5 text-cyan-400"></i>
+                    <span id="location-text">Optimizing for your region...</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Chat Interface -->
+        <div id="chat-interface" class="max-w-4xl mx-auto relative group mb-24 scroll-mt-24">
+            <!-- Glow Effect -->
+            <div
+                class="absolute -inset-1 bg-gradient-to-r from-emerald-600 to-cyan-600 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200">
+            </div>
+
+            <div
+                class="relative bg-slate-900/80 backdrop-blur-xl rounded-2xl border border-slate-700/50 shadow-2xl overflow-hidden flex flex-col h-[650px]">
+
+                <!-- Chat Messages Area -->
+                <div id="chat-messages" class="flex-1 overflow-y-auto p-6 space-y-6 scroll-smooth">
+                    <!-- Welcome Message -->
+                    <div class="flex justify-start animate-fade-in">
+                        <div
+                            class="glass-card text-slate-200 p-6 rounded-2xl rounded-bl-none max-w-[85%] shadow-lg border border-slate-700/50">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div
+                                    class="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-cyan-600 flex items-center justify-center shadow-inner">
+                                    <i data-lucide="bot" class="w-5 h-5 text-white"></i>
+                                </div>
+                                <span class="font-bold text-white text-sm">CBAg Assistant</span>
+                            </div>
+                            <p id="welcome-text" class="leading-relaxed">Hello. I can calculate emissions, find HS
+                                codes, and draft compliance reports.</p>
+                        </div>
+                    </div>
+
+                    <!-- Suggested Questions Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 px-2 animate-fade-in"
+                        style="animation-delay: 0.2s;">
+                        <button onclick="fillInput('What is the HS code for Aluminum structures?')"
+                            class="suggestion-chip text-left p-4 rounded-xl bg-slate-800/40 hover:bg-slate-800/60 border border-slate-700/50 transition-all group">
+                            <div class="flex items-center gap-3 mb-1">
+                                <div
+                                    class="p-2 rounded-lg bg-blue-500/10 text-blue-400 group-hover:text-blue-300 transition-colors">
+                                    <i data-lucide="search" class="w-4 h-4"></i>
+                                </div>
+                                <span class="font-semibold text-slate-200 text-sm">Find HS Codes</span>
+                            </div>
+                            <p class="text-xs text-slate-400 pl-[3.25rem]">"What is the HS code for Aluminum
+                                structures?"</p>
+                        </button>
+
+                        <button onclick="fillInput('Calculate emissions for 500 tons of Steel.')"
+                            class="suggestion-chip text-left p-4 rounded-xl bg-slate-800/40 hover:bg-slate-800/60 border border-slate-700/50 transition-all group">
+                            <div class="flex items-center gap-3 mb-1">
+                                <div
+                                    class="p-2 rounded-lg bg-emerald-500/10 text-emerald-400 group-hover:text-emerald-300 transition-colors">
+                                    <i data-lucide="calculator" class="w-4 h-4"></i>
+                                </div>
+                                <span class="font-semibold text-slate-200 text-sm">Calculate Emissions</span>
+                            </div>
+                            <p class="text-xs text-slate-400 pl-[3.25rem]">"Calculate emissions for 500 tons of Steel."
+                            </p>
+                        </button>
+
+                        <button onclick="fillInput('When is the next reporting deadline?')"
+                            class="suggestion-chip text-left p-4 rounded-xl bg-slate-800/40 hover:bg-slate-800/60 border border-slate-700/50 transition-all group">
+                            <div class="flex items-center gap-3 mb-1">
+                                <div
+                                    class="p-2 rounded-lg bg-orange-500/10 text-orange-400 group-hover:text-orange-300 transition-colors">
+                                    <i data-lucide="calendar" class="w-4 h-4"></i>
+                                </div>
+                                <span class="font-semibold text-slate-200 text-sm">Deadlines</span>
+                            </div>
+                            <p class="text-xs text-slate-400 pl-[3.25rem]">"When is the next reporting deadline?"</p>
+                        </button>
+
+                        <button onclick="fillInput('Explain the default values for Cement.')"
+                            class="suggestion-chip text-left p-4 rounded-xl bg-slate-800/40 hover:bg-slate-800/60 border border-slate-700/50 transition-all group">
+                            <div class="flex items-center gap-3 mb-1">
+                                <div
+                                    class="p-2 rounded-lg bg-purple-500/10 text-purple-400 group-hover:text-purple-300 transition-colors">
+                                    <i data-lucide="book-open" class="w-4 h-4"></i>
+                                </div>
+                                <span class="font-semibold text-slate-200 text-sm">Regulations</span>
+                            </div>
+                            <p class="text-xs text-slate-400 pl-[3.25rem]">"Explain the default values for Cement."</p>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Input Area -->
+                <div class="p-4 bg-slate-900/50 border-t border-slate-700/50 backdrop-blur-md">
+                    <div class="relative">
+                        <input type="text" id="chat-input"
+                            class="w-full bg-slate-800/50 text-white placeholder-slate-500 border border-slate-700 rounded-xl py-4 pl-5 pr-14 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 transition-all shadow-inner"
+                            placeholder="Ask anything about CBAM compliance..."
+                            onkeydown="if(event.key === 'Enter') sendMessage()">
+                        <button onclick="sendMessage()"
+                            class="absolute right-2 top-2 p-2 bg-gradient-to-r from-cyan-600 to-cyan-500 hover:from-cyan-500 hover:to-cyan-400 text-white rounded-lg transition-all shadow-lg hover:shadow-cyan-500/25">
+                            <i data-lucide="send" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                    <div class="flex justify-between items-center mt-3 px-1">
+                        <p class="text-xs text-slate-500">
+                            <i data-lucide="shield-check" class="w-3 h-3 inline mr-1 text-emerald-500"></i>
+                            Encrypted & Anonymous
+                        </p>
+                        <p class="text-xs font-mono text-slate-500">
+                            <span id="uses-count" class="text-cyan-400 font-bold">2</span>/2 Free Trials
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Who Needs This Section -->
+        <div class="mb-24">
+            <h2 class="text-3xl font-bold text-center text-white mb-12">Who Needs CBAg?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div
+                    class="p-8 rounded-2xl bg-slate-800/30 border border-slate-700/50 hover:border-cyan-500/30 transition-colors">
+                    <div
+                        class="w-12 h-12 bg-blue-900/30 text-blue-400 rounded-xl flex items-center justify-center mb-6">
+                        <i data-lucide="anchor" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Customs Brokers</h3>
+                    <p class="text-slate-400 leading-relaxed">Instantly verify HS codes and compliance requirements for
+                        your clients without hours of research.</p>
+                </div>
+                <div
+                    class="p-8 rounded-2xl bg-slate-800/30 border border-slate-700/50 hover:border-cyan-500/30 transition-colors">
+                    <div
+                        class="w-12 h-12 bg-emerald-900/30 text-emerald-400 rounded-xl flex items-center justify-center mb-6">
+                        <i data-lucide="truck" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Freight Forwarders</h3>
+                    <p class="text-slate-400 leading-relaxed">Stay ahead of supply chain disruptions caused by missing
+                        or incorrect CBAM documentation.</p>
+                </div>
+                <div
+                    class="p-8 rounded-2xl bg-slate-800/30 border border-slate-700/50 hover:border-cyan-500/30 transition-colors">
+                    <div
+                        class="w-12 h-12 bg-orange-900/30 text-orange-400 rounded-xl flex items-center justify-center mb-6">
+                        <i data-lucide="factory" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Importers</h3>
+                    <p class="text-slate-400 leading-relaxed">Directly dealing with Steel, Aluminum, Cement,
+                        Fertilizers, Hydrogen, or Electricity.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Airtable Embed Section -->
+        <div id="partner-form" class="max-w-4xl mx-auto mb-24">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-white mb-4">Get Full Access</h2>
+                <p class="text-slate-400">Join the partner program to unlock unlimited queries and report generation.
+                </p>
+            </div>
+            <div class="rounded-2xl overflow-hidden border border-slate-700 shadow-2xl bg-slate-800">
+                <iframe class="airtable-embed" src="https://airtable.com/embed/applxtlyMBLwM1qS7/pagQRb8TjEYQozs2a/form"
+                    frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent;"></iframe>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 bg-slate-900 py-12">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2">
+                <div class="bg-gradient-to-br from-emerald-600 to-cyan-600 p-1.5 rounded-lg">
+                    <span class="font-bold text-lg text-white">CBAg</span>
+                </div>
+                <div class="text-slate-400 text-sm">
+                    &copy; 2025 CBAg. All rights reserved.
+                </div>
+                <div class="flex gap-6">
+                    <a href="mailto:oladeji.lawrence@gmail.com"
+                        class="text-slate-400 hover:text-white transition-colors text-sm">Contact Sales</a>
+                    <a href="#" class="text-slate-400 hover:text-white transition-colors text-sm">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="text-center mt-8 text-slate-600 text-xs">
+                Built by Lawrence Oladeji
+            </div>
+    </footer>
+
+    <!-- Registration Modal (Hidden by default) -->
+    <div id="auth-modal"
+        class="hidden fixed inset-0 bg-slate-900/95 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
+        <div
+            class="bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl max-w-md w-full overflow-hidden relative">
+            <div class="bg-gradient-to-r from-emerald-600 to-cyan-600 p-6 text-center">
+                <div
+                    class="mx-auto w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mb-4 backdrop-blur-md">
+                    <i data-lucide="lock" class="w-8 h-8 text-white"></i>
+                </div>
+                <h2 class="text-2xl font-black text-white mb-1">Trial Limit Reached</h2>
+                <p class="text-emerald-50 text-sm font-medium">You've asked your 2 free questions.</p>
+            </div>
+            <div class="p-8">
+                <p class="text-slate-300 text-center mb-6">Please complete the form below to request full partner
+                    access.</p>
+                <button
+                    onclick="document.querySelector('.airtable-embed').scrollIntoView({behavior: 'smooth'}); document.getElementById('auth-modal').classList.add('hidden'); document.getElementById('auth-modal').classList.remove('flex');"
+                    class="w-full bg-white text-slate-900 hover:bg-slate-200 font-bold py-3 rounded-xl transition-all shadow-lg">
+                    Go to Registration Form
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

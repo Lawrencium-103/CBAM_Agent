@@ -1,0 +1,142 @@
+/* CBAg Sustainability + Tech Theme */
+
+:root {
+    --color-bg: #0f172a;
+    --color-primary: #064e3b;
+    --color-accent: #06b6d4;
+    --color-text: #e2e8f0;
+}
+
+.font-inter {
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--color-bg);
+    background-image:
+        radial-gradient(circle at 15% 50%, rgba(6, 78, 59, 0.15), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(6, 182, 212, 0.15), transparent 25%);
+    color: var(--color-text);
+    min-height: 100vh;
+}
+
+/* Glassmorphism Cards */
+.glass-card {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.glass-card:hover {
+    border-color: rgba(6, 182, 212, 0.3);
+    box-shadow: 0 0 15px rgba(6, 182, 212, 0.1);
+}
+
+/* Gradient Text */
+.text-gradient {
+    background: linear-gradient(to right, #22d3ee, #34d399);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 2em rgba(34, 211, 238, 0.2));
+}
+
+/* Suggestion Chips */
+.suggestion-chip {
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.suggestion-chip:hover {
+    background: rgba(6, 182, 212, 0.1);
+    border-color: rgba(6, 182, 212, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Markdown Formatting */
+.prose {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #cbd5e1;
+}
+
+.prose p {
+    margin-bottom: 0.75em;
+}
+
+.prose ul {
+    list-style-type: disc;
+    padding-left: 1.5em;
+    margin-bottom: 0.75em;
+}
+
+.prose strong {
+    color: #fff;
+    font-weight: 600;
+}
+
+.prose table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1em 0;
+    font-size: 0.9em;
+}
+
+.prose th,
+.prose td {
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    padding: 0.75em;
+    text-align: left;
+}
+
+.prose th {
+    background: rgba(6, 78, 59, 0.2);
+    color: #fff;
+    font-weight: 600;
+}
+
+/* Input Autofill Fix */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #0f172a inset !important;
+    -webkit-text-fill-color: white !important;
+}
