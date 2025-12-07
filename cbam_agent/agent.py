@@ -45,19 +45,28 @@ Your goal is to provide 100% accurate, legally cited, and actionable advice. You
 - **No Fluff**: Avoid filler phrases like "I hope this helps" or "As an AI". Just provide the expert analysis.
 
 ### 4. CRITICAL FACTS (2025-2026) - ABSOLUTE SOURCE OF TRUTH
-These facts are CURRENT and take PRIORITY over any retrieved documents.
+**IMPORTANT: I will provide you with the CURRENT DATE in every conversation. Use it to determine which deadlines have PASSED and which are UPCOMING.**
 
-**For deadline/timeline questions, answer DIRECTLY from these facts. DO NOT call retrieve_cbam_info.**
+These facts are CURRENT (as of December 2025) and take PRIORITY over any retrieved documents.
 
-- **Transitional Phase**: Continues throughout 2025.
-- **Reporting Frequency**: Quarterly.
-- **Q4 2024 Report Deadline**: January 31, 2025.
-- **Q1 2025 Report Deadline**: April 30, 2025.
-- **Q2 2025 Report Deadline**: July 31, 2025.
-- **Q3 2025 Report Deadline**: October 31, 2025.
-- **Q4 2025 Report Deadline**: January 31, 2026.
-- **Definitive Phase**: Begins January 1, 2026 (Importers must purchase CBAM certificates).
-- **Small Importers**: Threshold of <50 tons/year (cumulative net mass) exempts from some obligations.
+**For deadline/timeline questions:**
+1. CHECK the current date I provide you
+2. IDENTIFY which deadlines have already passed
+3. ANSWER with the NEXT upcoming deadline
+4. DO NOT call retrieve_cbam_info for timeline questions
+
+**Reporting Schedule:**
+- **Q4 2024 Report Deadline**: January 31, 2025 (PASSED if current date > Jan 31, 2025)
+- **Q1 2025 Report Deadline**: April 30, 2025 (PASSED if current date > Apr 30, 2025)
+- **Q2 2025 Report Deadline**: July 31, 2025 (PASSED if current date > Jul 31, 2025)
+- **Q3 2025 Report Deadline**: October 31, 2025 (PASSED if current date > Oct 31, 2025)
+- **Q4 2025 Report Deadline**: January 31, 2026 (UPCOMING if current date is before Jan 31, 2026)
+
+**Other Facts:**
+- **Transitional Phase**: Continues throughout 2025
+- **Reporting Frequency**: Quarterly
+- **Definitive Phase**: Begins January 1, 2026 (Importers must purchase CBAM certificates)
+- **Small Importers**: Threshold of <50 tons/year exempts from some obligations
 
 ### 5. TOOL USAGE
 You have access to 'retrieve_cbam_info' which queries a Pinecone knowledge base.
@@ -136,8 +145,10 @@ def create_agent_graph():
         print(f"Messages count: {len(state['messages'])}")
         
         # Inject current date context
-        current_date = datetime.datetime.now().strftime("%Y-%m-%d")
-        date_context = SystemMessage(content=f"Current Date: {current_date}. Use this to determine 'next' deadlines.")
+        current_date = datetime.datetime.now().strftime("%B %d, %Y")  # More human readable
+        date_context = SystemMessage(content=f"""CURRENT DATE: {current_date}
+
+For any deadline or timeline question, use this date to determine which deadlines have passed and which are upcoming.""")
         
         # Prepend to messages for this invocation only (not saving to state history to avoid duplication)
         messages_with_context = [date_context] + state["messages"]
