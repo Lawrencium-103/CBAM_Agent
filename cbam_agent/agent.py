@@ -82,8 +82,19 @@ You have access to 'retrieve_cbam_info' which queries a Pinecone knowledge base.
 def retrieve_cbam_info(query: str) -> str:
     """
     Queries the Pinecone Assistant for information related to CBAM (Carbon Border Adjustment Mechanism).
-    Use this tool to get factual answers, legal text references, and official guidance.
+    
+    DO NOT USE THIS TOOL FOR: Reporting deadlines, timelines, "next deadline" questions
+    Use this tool for: Emissions calculations, HS code lookups, specific regulations, compliance procedures
     """
+    
+    # Detect deadline/timeline queries and refuse them
+    deadline_keywords = ['deadline', 'timeline', 'next', 'when', 'schedule', 'quarter', 'q1', 'q2', 'q3', 'q4']
+    if any(keyword in query.lower() for keyword in deadline_keywords):
+        return """ERROR: This tool cannot answer deadline/timeline questions. 
+        
+Use the Critical Facts (2025-2026) provided in your system prompt instead.
+Current date has been provided to you - use it to determine which deadlines have PASSED and which are UPCOMING."""
+    
     if not PINECONE_API_KEY:
         return "Error: PINECONE_API_KEY not configured."
 
